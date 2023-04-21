@@ -1,0 +1,262 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0 text-primary"><a [routerLink]="['/enseignants']">Gestion des enseignants</a></h5>
+      </li>
+      
+      <li class="breadcrumb-item"><a [routerLink]="['/AjoutEnseignant']">Formulaire</a></li>
+    </ul>
+    <div class="section-body">
+        <div class="card">
+            <div class="card-header">
+              <!--<h4 class="text-primary">Nouvel élève</h4>-->
+            </div>
+            <div class="card-body">
+              <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                <li [ngbNavItem]="1">
+                  <a ngbNavLink>Informations personnelles</a>
+                  <ng-template ngbNavContent>
+                <form class="register-form" [formGroup]="register">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                    <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">-->
+                      <!--<div class="form-group">-->
+                        <label>Prénom <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                        <i class="fas fa-pen text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Prénom de l'enseignant" formControlName="firstName"
+                          required></div><!--</div>-->
+                          <small class="form-text text-danger"
+                          *ngIf="!register.get('firstName').valid && register.get('firstName').touched">Champs obligatoire!</small>
+                          
+                     
+                        <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">-->
+                          <!--<div class="form-group">-->
+                                <label>Nom <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text">
+                        <i class="fas fa-pen text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Nom de l'enseignant" formControlName="lastName">
+                        <!--</div>-->
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('lastName').valid && register.get('lastName').touched"> Champs obligatoire!</small>
+                      </div>
+                      
+                      
+
+                        <!--<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">-->
+                          <!--<div class="form-group">-->
+                            <label>Civilité <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                            <i class="fas fa-child text-primary"></i>
+                        </div>
+                        </div>
+                        <select class="form-control" formControlName="gender" required>
+                          <option value="" selected disabled>Sélectionner</option>
+                          <option *ngFor="let gender of genders" [value]="gender.value">
+                            {{gender.value}}
+                          </option>
+                        </select>
+                    <!--</div>-->
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <img src="assets/images/prof.jpeg" height="160px" width="300px" style="margin-left:20%;" alt="Enseignant"><br><br>
+                <input type="file" id="file" class="form-control" style="display:none">
+                <label for="file" class="btn btn-outline-primary" style="margin-left:31%;" ><i class="far fa-image">&nbsp;</i>Choisir une photo</label>
+                <!---->
+                
+                  <!---->
+              </div>
+          
+        </div>
+
+                    
+
+          <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                            <label>Numéro de téléphone <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                        <i class="fas fa-phone text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="number" class="form-control" placeholder="Numéro de téléphone" formControlName="phone" required>
+                      </div>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('phone').valid && register.get('phone').touched"> Champs obligatoire!</small>
+                          </div>
+                    
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                            <label>E-mail <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                        <i class="fas fa-user text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="email" class="form-control" placeholder="exemple@gmail.com" formControlName="email" required>
+                        </div>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('email').valid && register.get('email').touched"> Veuillez entrer un email valide</small>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                            <label>Date de naissance <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                        <i class="fas fa-calendar text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="date" class="form-control" placeholder="Date de naissance" formControlName="dateNaissance" required>
+                        </div>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('dateNaissance').valid && register.get('dateNaissance').touched"> Champs obligatoire!</small>
+                      </div>
+
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>Matiére enseigné <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fas fa-user-graduate text-primary"></i>
+                          </div>
+                          </div>
+                        <select class="form-control" formControlName="matiere" required>
+                          <option value="" selected disabled>Sélectionner</option>
+                          <option *ngFor="let matiere of matiereType" [value]="matiere.value">
+                            {{matiere.value}}
+                          </option>
+                        </select></div>
+                      </div>
+                      </div>
+
+                     
+                    <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                                <label>Gouvernorat <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                          <select class="form-control" formControlName="gouvernorat" required>
+                            <option value="" selected disabled>Sélectionner</option>
+                            <option *ngFor="let gouvernorat of gouvernoratType" [value]="gouvernorat.value">
+                              {{gouvernorat.value}}
+                            </option>
+                          </select>
+                        </div>
+                        </div>
+                        
+                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                                <label>Délégation <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                          <input type="text" class="form-control" placeholder="Délégation" formControlName="delegation" required>
+                          </div>
+                          <small class="form-text text-danger"
+                          *ngIf="!register.get('delegation').valid && register.get('delegation').touched"> Champs obligatoire!</small>
+                        </div>
+                        
+                            <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                                    <label>Code postal <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                            <i class="fas fa-globe text-primary"></i>
+                            </div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Code postal" formControlName="code" required>
+                            </div>
+                            <small class="form-text text-danger"
+                              *ngIf="!register.get('code').valid && register.get('code').touched"> Champs obligatoire!</small>
+                            
+                          </div>
+                      </div>
+
+                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                            <label>Rue <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                        <i class="fas fa-map-marker-alt text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Rue" formControlName="rue" required>
+                        </div>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('rue').valid && register.get('rue').touched"> Champs obligatoire!</small>
+                      </div>
+                      
+                        <div class="card-footer text-end">
+                            <button class="btn btn-primary">Valider</button>
+                          </div>
+                    </form>
+                  </ng-template>
+                  </li>
+
+                  <li [ngbNavItem]="2">
+                    <a ngbNavLink>Authentification et sécurité</a>
+                    <ng-template ngbNavContent>
+                      <form class="register-form" [formGroup]="register">
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                            <label>Login <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                            <div class="input-group-prepend">
+                            <div class="input-group-text">
+                          <i class="fas fa-user text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Login" formControlName="login" required>
+                        </div>
+                          <small class="form-text text-danger"
+                            *ngIf="!register.get('login').valid && register.get('login').touched"> Champs obligatoire!</small>
+                        </div>
+                        <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <label>Mot de passe <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                          <i class="fas fa-key text-primary"></i>
+                          </div>
+                          </div>
+                          
+                         <input name="password"
+                                [type]="showPassword ? 'text' : 'password'"
+                                class="form-control pwd-control"
+                                id="password-field" placeholder="Password" class="form-control" formControlName="password" required>
+                          </div>
+                          <small class="form-text text-danger"
+                          *ngIf="!register.get('password').valid && register.get('password').touched"> Champs obligatoire!</small>
+                      </div>
+                      </div>
+                      <div class="card-footer text-end">
+                        <button class="btn btn-primary">Valider</button>
+                      </div>
+                      </form>
+                    </ng-template>
+                  </li>
+
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+              
+      
+              
+            </div>
+          </div>
+      </div>
+  </section>
+  
+

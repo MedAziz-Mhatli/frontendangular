@@ -1,0 +1,109 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+      <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0"><a [routerLink]="['/dashboard/main']">Matières</a></h5>
+      </li>
+      <li class="breadcrumb-item"><a [routerLink]="['/anglais']">{{Matieres.nomMatiere}}</a></li>
+    </ul>
+    <div class="section-body">
+        <div class="row">
+            
+              <!--Tabs-->
+              <div class="col-12 col-md-6 col-lg-12"  >
+            
+             
+                    </div>
+                <!---->
+              <div class="card" class="card card-primary" style="background-color:rgb(232, 232, 248)">
+                <div class="card-header" >
+                  <img src="{{Matieres.imageMatiere}}" alt="{{Matieres.nomMatiere}}" >
+                  <h3 class="text-primary mb-2">&nbsp;&nbsp;{{Matieres.nomMatiere}}</h3>
+                 </div>
+                <div class="card-body">
+                  <ul ngbNav #nav6="ngbNav" [(activeId)]="active4" class="nav-pills">
+                    <ng-container *ngFor="let t of types" [ngbNavItem]="t.nomTypeFichier" > 
+                      <a ngbNavLink>{{t.nomTypeFichier}}</a>
+                      <ng-template ngbNavContent>
+      
+    <div class="row" *ngIf="t.nomTypeFichier=='Cours'">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let c of chapitres;let i=index" >
+        <a [routerLink]="['/advance-table',c.idC]"><div class="card card-primary"  >
+          <div class="card-header">
+            <h4>{{c.nom}}</h4>
+          </div>
+          <div class="card-body" >
+            <p class="mb-0"><span class="col-blue-grey">Chapiter {{i+1}}</span></p>
+                  <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-book-open text-info mb-2">&nbsp;</i> ressources numériques</span>
+                    <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-video text-success mb-2">&nbsp;</i> Vidéos</span></p>
+                   <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-clipboard text-warning mb-2">&nbsp;</i>résumé</span></p>
+          </div>
+        </div></a>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="t.nomTypeFichier=='Enregistrements'">
+
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let e of enregistrements;let i=index" >
+        <a [routerLink]="['/advance-table']"><div class="card card-primary"  >
+          <div class="card-header">
+            <p class="mb-0" style="color: rgb(41, 159, 72);"><span >Enregistrement {{i+1}}</span></p>
+          </div>
+          <div class="card-body" >
+           
+            <h6>{{e.nom}}</h6>
+            <p class="mb-0"><span class="col-blue-grey">{{e.nomE}} {{e.prenomE}}</span></p>    
+                 <!-- <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-book-open text-info mb-2">&nbsp;</i> ressources numériques</span>
+                    <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-video text-success mb-2">&nbsp;</i> Vidéos</span></p>-->
+          </div>
+        </div></a>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="t.nomTypeFichier=='Examens'">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let ee of examen;let i=index" >
+        <a [routerLink]="['/advance-table']"><div class="card card-primary"  >
+          <div class="card-header">
+             <p class="mb-0" style="color: rgb(41, 159, 72);"><span >Examen {{i+1}}</span></p>
+          </div>
+          <div class="card-body" >
+              <h6>{{ee.nom}}</h6>
+              <p class="mb-0"><span class="col-blue-grey">{{ee.nomE}} {{ee.prenomE}}</span></p>         
+                 <!-- <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-book-open text-info mb-2">&nbsp;</i> ressources numériques</span>
+                    <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-video text-success mb-2">&nbsp;</i> Vidéos</span></p>   -->
+          </div>
+        </div></a>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="t.nomTypeFichier=='Divers'">
+      <!-- first row-->
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let d of divers;let i=index" >
+        <a [routerLink]="['/advance-table']"><div class="card card-primary"  >
+          <div class="card-header">
+            <p class="mb-0" style="color: rgb(41, 159, 72);"><span >Divers {{i+1}}</span></p>
+          </div>
+          <div class="card-body" >
+             
+            <h6>{{d.nom}}</h6>
+              <p class="mb-0"><span class="col-blue-grey">{{d.nomE}} {{d.prenomE}}</span></p>                 
+                 <!-- <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-book-open text-info mb-2">&nbsp;</i> ressources numériques</span>
+                    <p class="mb-0"><span class="col-blue-grey"><i class="fas fa-video text-success mb-2">&nbsp;</i> Vidéos</span></p> -->                 
+          </div>
+        </div></a>
+      </div>
+    </div>
+    
+        </ng-template>
+      </ng-container>
+                    
+                 
+                  </ul>
+          
+                  <div [ngbNavOutlet]="nav6" class="mt-2"></div>
+                </div>
+              </div>
+              </div>
+    </div>
+    
+    <!--</div>-->
+    </section>

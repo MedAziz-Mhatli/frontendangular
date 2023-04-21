@@ -1,0 +1,631 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0 text-primary"><a [routerLink]="['/élèves']">Gestion des élèves</a></h5>
+      </li>
+      
+      <li class="breadcrumb-item" ><a [routerLink]="['/AjoutElève']">Formulaire</a></li>
+    </ul>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <aw-wizard [navBarLayout]="'large-empty-symbols'">
+                <aw-wizard-step stepTitle="Informations personelles">
+                  <ng-template awWizardStepSymbol>1</ng-template>
+                  <!--Début du tab Informations personnelles-->
+                  <br><br>
+                  <form  [formGroup]="registerEleve" >
+                    <div class="row">
+                      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <label>Prénom <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                          <i class="fas fa-pen text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Prénom de l'élève" formControlName="prenomEleve"
+                              ></div>
+                            <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('prenomEleve').valid && registerEleve.get('prenomEleve').touched">Champs obligatoire!</small>-->
+                            
+                                  <label>Nom <span class="text-danger">*</span></label>
+                                  <div class="input-group">
+                                  <div class="input-group-prepend">
+                                  <div class="input-group-text">
+                          <i class="fas fa-pen text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Nom de l'élève" formControlName="nomEleve"   >
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('nomEleve').valid && registerEleve.get('nomEleve').touched"> Champs obligatoire!</small>-->
+                        </div>
+                        
+                              <label>Genre <span class="text-danger">*</span></label>
+                              <div class="input-group">
+                              <div class="input-group-prepend">
+                              <div class="input-group-text">
+                              <i class="fas fa-child text-primary"></i>
+                          </div>
+                          </div>
+                          <select class="form-control" formControlName="sexeEleve"   >
+                            <option value="" selected disabled>Sélectionner</option>
+                            <option *ngFor="let gender of genders" [value]="gender.value">
+                              {{gender.value}}
+                            </option>
+                          </select>
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('sexeEleve').valid && registerEleve.get('sexeEleve').touched"> Champs obligatoire!</small>-->
+                  </div>
+              </div>
+
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <img src="assets/images/élève2.jpg" height="160px" width="300px" style="margin-left:20%;" alt="élève"><br><br>
+                  <input type="file" id="file" class="form-control" formControlName="photoEleve" style="display:none">
+                  <label for="file" class="btn btn-outline-primary" style="margin-left:31%;" ><i class="far fa-image">&nbsp;</i>Choisir une photo</label>
+                </div>
+            
+          </div>
+                      <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <!--<div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">-->
+                              <label>Date de naissance <span class="text-danger">*</span></label>
+                              <div class="input-group">
+                              <div class="input-group-prepend">
+                              <div class="input-group-text">
+                          <i class="fas fa-calendar text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="date" class="form-control" placeholder="Date de naissance" formControlName="dateNaissanceEleve"   >
+                          </div>
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('dateNaissanceEleve').valid && registerEleve.get('dateNaissanceEleve').touched"> Champs obligatoire!</small>-->
+                        </div>
+                        <!--</div>
+
+                        <div class="row">-->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <label>Niveau <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <i class="fas fa-user-graduate text-primary"></i>
+                            </div>
+                            </div>
+                            <!--<div class="col-md-12">
+                           <ng-select [items]="niveauListe" bindLabel="section"
+                    bindValue="id" placeholder="Sélectionner"
+                     formControlName="gouvernoratEleve" (ngModelChange)="onChangeGouvernorat($event)">
+                   </ng-select>
+                   </div>-->
+                          <!--<select class="form-control" formControlName="sectionNiveau">
+                            <option value="" selected disabled>Sélectionner</option>
+                            <option *ngFor="let niveau of niveauListe" [value]="niveau.section">
+                              {{niveau.section}}
+                            </option>
+                            </select>-->
+
+                            <select class="form-control"  formControlName="sectionNiveau" >                              
+                              <option *ngFor="let niveau of niveauListe"
+                                  value="/api/section_niveaus/{{niveau.id}}">
+                                  {{niveau.section}}
+                              </option>
+                          </select>
+
+                        </div>
+                        </div>
+                        </div>
+                        
+
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                              <label>Numéro de téléphone <span class="text-danger">*</span></label>
+                              <div class="input-group">
+                              <div class="input-group-prepend">
+                              <div class="input-group-text">
+                          <i class="fas fa-phone text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="number" class="form-control" placeholder="Numéro de téléphone" formControlName="phoneEleve"   >
+                        </div>
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('phoneEleve').valid && registerEleve.get('phoneEleve').touched"> Champs obligatoire!</small>-->
+                            </div>
+                      
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                              <label>E-mail <span class="text-danger">*</span></label>
+                              <div class="input-group">
+                              <div class="input-group-prepend">
+                              <div class="input-group-text">
+                          <i class="fas fa-user text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="email" class="form-control" placeholder="exemple@gmail.com" formControlName="emailEleve"   >
+                          </div>
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('emailEleve').valid && registerEleve.get('emailEleve').touched"> Veuillez entrer un email valide</small>-->
+                        </div>
+                      </div>
+                      <div class="row">
+
+                        <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <label>Gouvernorat <span class="text-danger">*</span></label>
+                          <div class="input-group">
+                   <select class="form-control" placeholder="Sélectionner" 
+                   [(ngModel)]="vGouvernorat" formControlName="gouvernorat"
+                    (ngModelChange)="onChangeGouvernorat($event)">
+                   <option value="" selected disabled>Sélectionner</option>
+                    <option *ngFor="let gouvernorat of gouvernoratListe"
+                    [value]="'/api/gouvernorats/'+gouvernorat.id">               
+                     {{gouvernorat.gouvernorat}}
+                    </option>
+                  </select>
+
+                  </div>
+
+                
+                  </div>
+                              
+                         
+
+              <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                <label>Délégation <span class="text-danger">*</span></label>
+                <div class="input-group">
+          <!--<input type="text" class="form-control" placeholder="Délégation" formControlName="delegationEleve"   >-->
+          <!--<select class="form-control" formControlName="delegationEleve">
+            <option value="" selected disabled>Sélectionner</option>
+            <option *ngFor="let delegation of delegationListe" [value]="delegation.deglegation">
+              {{delegation.delegation}}
+            </option>
+          </select>-->
+          <!--<div class="col-md-12">
+          <ng-select
+          [items]="delegationListeParGouvernorat"
+          bindLabel="nomDelegation"
+          bindValue="id"
+          placeholder="Sélectionner"
+          [(ngModel)]="vDelegation"
+          formControlName="delegationEleve"
+          (ngModelChange)="OnChangeDelegation($event)">   
+      </ng-select>
+      </div>-->
+
+      <select class="form-control" placeholder="Sélectionner" 
+      [(ngModel)]="vDelegation" 
+      formControlName="delegation" 
+      (ngModelChange)="OnChangeDelegation($event)">
+        <option value="" selected disabled>Sélectionner</option>                            
+          <option *ngFor="let delegation of delegationListeParGouvernorat" [value]="'/api/delegations/'+delegation.id" >
+        {{delegation.nomDelegation}}
+          </option>
+      </select>
+          </div>
+          <!--<small class="form-text text-danger"
+          *ngIf="!registerEleve.get('delegationEleve').valid && registerEleve.get('delegationEleve').touched"> Champs obligatoire!</small>-->
+        </div>
+
+         <!---->
+         <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+          <label>Ville <span class="text-danger">*</span></label>
+          <div class="input-group">
+
+  
+<select class="form-control" placeholder="Sélectionner" 
+[(ngModel)]="vVille" 
+formControlName="localite" 
+(ngModelChange)="OnChangeVille($event)">
+  <option value="" selected disabled>Sélectionner</option>                            
+    <option *ngFor="let localite of localiteListeParDelegation" [value]="'/api/localites/'+localite.id">
+        {{localite.nomLocalite}}
+    </option>
+</select>
+
+<!--<select class="form-control" placeholder="Sélectionner" 
+[(ngModel)]="vVille" 
+formControlName="localite" >
+  <option value="" selected disabled>Sélectionner</option>                            
+    <option *ngFor="let localite of localiteListeParDelegation" [value]="localite.nomLocalite">
+        {{localite.nomLocalite}}
+    </option>
+</select>-->
+
+<!--<div class="col-md-12">
+  <ng-select 
+    [items]="localiteListeParDelegation"
+          bindLabel="nomLocalite"
+          bindValue="id"
+          placeholder="Sélectionner"
+          [(ngModel)]="vVille"
+          formControlName="villeEleve"
+          (ngModelChange)="OnChangeVille($event)">
+   </ng-select>
+   </div>-->
+  </div>
+  <!--<small class="form-text text-danger"
+    *ngIf="!registerEleve.get('codePostalEleve').valid && registerEleve.get('codePostalEleve').touched"> Champs obligatoire!</small>-->
+</div>
+
+
+              
+                          <!---->
+                              
+                          <!---->
+
+
+                         
+
+                              <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                                      <label>Code postal <span class="text-danger">*</span></label>
+                                      <div class="input-group">
+                                      <select class="form-control" formControlName="codePostal">                          
+                                <option *ngFor="let codePostal of codeListeParLocalite" 
+                                [value]="'/api/localites/'+codePostal.id">
+                                    {{codePostal.code}}
+                                </option>
+                            </select>
+
+              
+
+
+                               
+                              </div>
+                            </div>
+                      </div>
+                          <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                              <label>Rue <span class="text-danger">*</span></label>
+                              <div class="input-group">
+                              <div class="input-group-prepend">
+                              <div class="input-group-text">
+                          <i class="fas fa-map-marker-alt text-primary"></i>
+                          </div>
+                          </div>
+                          <input type="text"  class="form-control" placeholder="Rue" formControlName="rue"   >
+                          </div>
+                          <!--<small class="form-text text-danger"
+                            *ngIf="!registerEleve.get('rue').valid && registerEleve.get('rue').touched"> Champs obligatoire!</small>-->
+                        </div>
+                      </form>
+                      <div class="card-footer text-end">
+                      <ul class="list-inline wizard mb-0">
+                        <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Précédent</button>
+                        </li>
+                        <li class="next list-inline-item float-end"><button class="btn btn-primary" awNextStep>Suivant</button></li>
+                        <!--<li class="list-inline-item"><button class="btn btn-primary" click="addEleve()" >Valider</button></li>-->
+                        <!--<li class="list-inline-item"><button class="btn btn-primary" (click)="addEleve()">Valider</button></li>-->
+                      </ul>
+                    </div>
+                  <!--Fin du tab Informations personnelles-->
+                </aw-wizard-step>
+  
+                <aw-wizard-step stepTitle="Authentification et sécurité">
+                  <ng-template awWizardStepSymbol>2</ng-template>
+                  <form [formGroup]="registerEleve" >
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>Login <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                      <i class="fas fa-user text-primary"></i>
+                      </div>
+                      </div>
+                      <input type="text"  class="form-control" placeholder="Login" formControlName="loginEleve"   >
+                    </div>
+                      <small class="form-text text-danger"
+                        *ngIf="!registerEleve.get('loginEleve').valid && registerEleve.get('loginEleve').touched"> Champs obligatoire!</small>
+                    </div>
+                    <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                      <label>Mot de passe <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                      <div class="input-group-prepend">
+                      <div class="input-group-text">
+                      <i class="fas fa-key text-primary"></i>
+                      </div>
+                      </div>
+                     <input name="password"
+                            [type]="showPassword ? 'text' : 'password'" 
+                            class="form-control pwd-control"
+                            id="password-field" placeholder="*******" class="form-control" formControlName="motPasseEleve"   >
+                      </div>
+                      <small class="form-text text-danger"
+                      *ngIf="!registerEleve.get('motPasseEleve').valid && registerEleve.get('motPasseEleve').touched"> Champs obligatoire!</small>
+                  </div>
+                  </div>
+
+                </form>
+                <div class="card-footer text-end">
+                  <ul class="list-inline wizard mb-0">
+                    <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Précédent</button></li>
+                      <li class="list-inline-item"><button class="btn btn-primary" (click)="addEleve()">Valider</button></li>
+                      <li class="next list-inline-item float-end"><button class="btn btn-primary" awNextStep>Suivant</button></li>
+                  </ul>  
+                  </div>
+                </aw-wizard-step>
+  
+                <aw-wizard-step stepTitle="Abonnements">
+                  <ng-template awWizardStepSymbol>3</ng-template>
+                <p class="text-primary">Abonnement actuel</p>
+                    <!--Debut du tab informations sur les abonnements-->
+                     <form [formGroup]="registerAbonnement">
+                    <div class="row">
+                        <label>Pack</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                <i class="fas fa-gift text-primary"></i>
+                </div>
+                </div>
+                      <select class="form-control" formControlName="typeAbonnement">
+                        <option value="" selected disabled>Sélectionner</option>
+                        <option *ngFor="let pack of listePack" value="/api/type_abonnements/{{pack.id}}">
+                          {{pack.pack}}
+                        </option>
+                      </select>
+
+                      
+
+                      
+                    </div>
+                  </div>
+
+                  <!--<div class="row">
+                    <label>Niveau</label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text">
+            <i class="fas fa-gift text-primary"></i>
+            </div>
+            </div>
+                
+                  <select class="form-control"  formControlName="sectionNiveau" >                              
+                    <option *ngFor="let niveau of niveauListe"
+                        value="/api/section_niveaus/{{niveau.id}}">
+                        {{niveau.section}}
+                    </option>
+                </select>
+
+                </div>
+              </div>-->
+
+              <div class="row">
+                <label>Matiére option</label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+        <i class="fas fa-gift text-primary"></i>
+        </div>
+        </div>
+              <select class="form-control" formControlName="optionMatiere">
+                <option value="" selected disabled>Sélectionner</option>
+                <option *ngFor="let option of listeOption" value="/api/option_matieres/{{option.id}}">
+                  {{option.optionMatiere}}
+                </option>
+              </select>
+
+            </div>
+          </div>
+                  <div class="row">
+                   <label>Date d'expiration</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                        <i class="fas fa-calendar text-primary"></i>
+                        </div>
+                        </div>
+                        <input type="date" class="form-control" placeholder="Date d'expiration" formControlName="dateExpiration">
+                        </div>
+                      </div> 
+               
+                  <div class="form-group">
+                    <label class="custom-switch mt-2">
+                      <input type="checkbox" name="custom-switch-checkbox" formControlName="etatAbonnement" class="custom-switch-input">
+                      <span class="custom-switch-indicator"></span>
+                      <span class="custom-switch-description">Activer l'abonnement</span>
+                    </label> 
+               </div>
+
+               <div class="card-footer text-end">
+                <ul class="list-inline wizard mb-0">
+                  <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Précédent</button></li>
+                  <li class="list-inline-item"><button class="btn btn-primary" (click)="addAbonnement()">Valider</button></li>
+                  <li class="next list-inline-item float-end"><button class="btn btn-primary" awNextStep>Suivant</button>
+                  </li>
+                </ul>
+              </div>
+                  </form>
+                 <!--<p class="text-primary">Historique des abonnements</p>-->
+                 <!--<app-historique-abonnements></app-historique-abonnements>-->
+                </aw-wizard-step>
+               <aw-wizard-step stepTitle="Informations sur les parents">
+                  <ng-template awWizardStepSymbol>4</ng-template>
+                  <form [formGroup]="registerParent">
+                    <div class="row">
+                      <div class="col-xl-2 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>Civilité</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                        <i class="fas fa-child text-primary"></i>
+                    </div>
+                    </div>
+                    <select class="form-control" formControlName="civiliteParent">
+                      <option value="" selected disabled>Sélectionner</option>
+                      <option *ngFor="let Pgender of Pgenders" [value]="Pgender.value">
+                        {{Pgender.value}}
+                      </option>
+                    </select>
+                    </div>
+                    </div>
+                      <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <label>Prénom</label>
+                          <div class="input-group">
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                      <i class="fas fa-pen text-primary"></i>
+                      </div>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Prénom du parent" formControlName="prenomParent">
+                    </div>
+                        </div>
+                  
+                        <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                          <label>Nom</label>
+                          <div class="input-group">
+                          <div class="input-group-prepend">
+                          <div class="input-group-text">
+                      <i class="fas fa-pen text-primary"></i>
+                      </div>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Nom du parent" formControlName="nomParent">
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+
+                    <div class="col-xl-2 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                      <label>Type </label>
+                      <div class="input-group">
+                      <div class="input-group-prepend">
+                      <div class="input-group-text">
+                      <i class="fas fa-child text-primary"></i>
+                  </div>
+                  </div>
+                  <select class="form-control" formControlName="typeParents">
+                    <option value="" selected disabled>Sélectionner</option>
+                    <option *ngFor="let type of parentType" [value]="type.value">
+                      {{type.value}}
+                    </option>
+                  </select>
+                  </div>
+                  </div>
+                    <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>Numéro de téléphone</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                    <i class="fas fa-phone text-primary"></i>
+                    </div>
+                    </div>
+                    <input type="number" class="form-control" placeholder="Numéro de téléphone" formControlName="phoneParent">
+                  </div>
+                      </div>
+                 
+                      <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>E-mail</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                    <i class="fas fa-user text-primary"></i>
+                    </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="exemple@gmail.com" formControlName="emailParent">
+                    </div>
+                  </div>
+
+                  </div>
+                  <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                    <label>Fonction </label>
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text">
+                <i class="fas fa-user-tie text-primary"></i>
+                </div>
+                </div>
+                <input type="text" class="form-control" placeholder="Fonction du parent" formControlName="fonctionParents">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                    <label>Gouvernorat</label>
+                    <div class="input-group">
+              
+              <select class="form-control" placeholder="Sélectionner" [(ngModel)]="vGouvernorat" formControlName="gouvernoratParents" (ngModelChange)="onChangeGouvernorat($event)">
+                <option value="" selected disabled>Sélectionner</option>                            
+                  <option *ngFor="let gouvernorat of gouvernoratListe" [value]="'/api/gouvernorats/'+gouvernorat.id">
+                      {{gouvernorat.gouvernorat}}
+                  </option>
+              </select>
+            </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+              <label>Délégation <span class="text-danger">*</span></label>
+              <div class="input-group">
+
+                <select class="form-control" placeholder="Sélectionner" [(ngModel)]="vDelegation" formControlName="delegationParents" (ngModelChange)="OnChangeDelegation($event)">
+                  <option value="" selected disabled>Sélectionner</option>                            
+                    <option *ngFor="let delegation of delegationListeParGouvernorat" [value]="'/api/delegations/'+delegation.id" >
+                        {{delegation.nomDelegation}}
+                    </option>
+                </select>
+
+               
+    
+      </div>
+    </div>
+            
+                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                    <label>Ville</label>
+                    <div class="input-group">
+                      <select class="form-control" placeholder="Sélectionner" [(ngModel)]="vVille" formControlName="localite" (ngModelChange)="OnChangeVille($event)">
+                        <option value="" selected disabled>Sélectionner</option>                            
+                          <option *ngFor="let localite of localiteListeParDelegation" [value]="'/api/localites/'+localite.id">
+                              {{localite.nomLocalite}}
+                          </option>
+                      </select>
+              
+              </div>
+            </div>
+            
+                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                        <label>Code postal</label>
+                        <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">
+                <i class="fas fa-globe text-primary"></i>
+                </div>
+                </div>
+                <select class="form-control" [(ngModel)]="vVille" formControlName="codePostalParents">                              
+                  <option *ngFor="let codePostal of codeListeParLocalite" [value]="codePostal.code" >
+                      {{codePostal.code}}
+                  </option>
+              </select>
+
+              <!--<input type="number" formControlName="codePostalParents" class="form-control" placeholder="code">-->
+                
+                </div> 
+              </div>
+          </div>
+            <div class="col-xl-12 col-lg-6 col-md-12 col-sm-12 mb-2 form-group">
+                <label>Rue </label>
+                <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="input-group-text">
+            <i class="fas fa-map-marker-alt text-primary"></i>
+            </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Rue" formControlName="rue">
+            </div>
+          </div>
+                  </form>
+                  <div class="card-footer text-end">
+                    <ul class="list-inline wizard mb-0">
+                      <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Précédent</button>
+                      </li>
+                      <li class="list-inline-item"><button class="btn btn-primary" (click)="addParent()">Valider</button></li>
+                    </ul>
+                  </div>
+                </aw-wizard-step>
+              </aw-wizard>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+  

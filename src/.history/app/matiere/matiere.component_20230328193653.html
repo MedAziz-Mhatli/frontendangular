@@ -1,0 +1,204 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+      <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0">Catégories</h5>
+      </li>
+      <li class="breadcrumb-item bcrumb-1">
+        <a routerLink="/dashboard/main">
+          <i class="
+fas fa-shopping-cart font-17"></i></a>
+      </li>
+    <!--  <li class="breadcrumb-item" style="font-size: 15px;">Niveau</li>-->
+      
+    </ul>
+   
+    <div class="section-body" >
+      <div class="row" >
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" > 
+          
+            <div class="card" >
+                <div class="p-10" >
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="row m-0">
+                        <!--<div class="col-lg-3 p-0">
+                          <div class="ngxTableHeader">
+                            <div class="table-title">
+                              <h2><strong>Fiches matières</strong></h2>
+                            </div>
+                          </div>
+                        </div>-->
+                        <div class="col-lg-6 p-0">
+                          <div class="ngxTableHeader">
+                            <div class="table-search-area">
+                              <div>
+                                <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                                <input placeholder="Chercher..." type="text"  class="browser-default search-field"
+                                  (keyup)='filterDatatable($event)' aria-label="Search box" >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-6 p-0">
+                          <div class="ngxTableHeader">
+                            <!--<div class="header-buttons-left">-->
+                            <!--  <div class="icon-button-demo buttons">-->
+                                <button class="btn btn-icon icon-left btn-primary rounded-button"  (click)='addRow(addRecord)' >
+                                  <i class="material-icons">add</i>
+                                </button>
+                                &nbsp;&nbsp;<button [hidden]=!isRowSelected class="btn btn-icon icon-left btn-danger rounded-button"
+                                  (click)='deleteSelected()' >
+                                  <i class="material-icons">delete</i>
+                                  
+                                </button>
+                             <!-- <a [routerLink]="['/chapitres']">  <button title="chapitres" [hidden]=!isRowSelected class="btn btn-icon icon-left btn-success rounded-button"
+                                  >
+                                  <i class="material-icons">folder_open
+ 
+                                 </i>
+                                  
+                                </button></a>-->
+                               <!-- &nbsp;&nbsp;<a [routerLink]="['/chapitres']"> <button class="btn btn-outline-primary "  [hidden]=!isRowSelected >Chapitres</button></a>-->
+                                <!--&nbsp; <a [routerLink]="['/fichesMatieres']"> <button class="btn btn-outline-danger " [hidden]=!isRowSelected >Fichiers </button></a>-->
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ngx-datatable    #table class="material" [rows]="data" [loadingIndicator]="loadingIndicator"
+                    columnMode="force" [headerHeight]="60" [footerHeight]="80" rowHeight="auto" [limit]="5"
+                    [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable" [selected]="selected"
+                    [selectionType]="'checkbox'" (select)='onSelect($event)' [rows]="categories" [columns]="columns">
+                    
+                    <ngx-datatable-column [width]="70" [sortable]="false" [draggable]="false" [resizeable]="false"
+                      [canAutoResize]="false" [headerCheckboxable]="true" [checkboxable]="true">
+                    </ngx-datatable-column>
+         
+                    <ngx-datatable-column [width]="200" name="nom categorie" >
+                      <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                        <div class="name-col-style"  >
+                          <div>{{categorie.nom_categorie}}</div>
+                         <!-- <div>{{row.firstName}} {{row.lastName}}</div>-->
+                         <!-- <div class="font-12 text-muted">{{row.designation}}</div>-->
+                        </div>
+                      </ng-template>
+                    </ngx-datatable-column>
+                   
+                    
+                   
+                   
+                    <ngx-datatable-column [width]="100" name="Actions" sortable="false" [width]="100">
+                      <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                        <span>
+                          <button class="btn btn-tbl-edit h-auto" (click)='editRow(row, rowIndex, editRecord)'>
+                            <i class="fas fa-pen"></i>
+                          </button>
+                          <button class="btn btn-tbl-delete h-auto" (click)='deleteSingleRow(row)'>
+                            <i class="far fa-trash-alt"></i>
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                  <!-- Add Record Modal Window -->
+                  <ng-template #addRecord let-modal>
+                    <div class="modal-header editRowModal">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        <div class="table-modal-header">
+                          <img [src]='newUserImg' alt="avatar">
+                          <div class="modal-about">
+                            <div class="fw-bold p-t-10 font-17">
+                              Nouvelle Catégorie</div>
+                          </div>
+                        </div>
+                      </h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                        <span aria-hidden="true"><i class="material-icons">close</i></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="register-form" [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
+                        <div class="input-field col s12 d-none">
+                          <input formControlName="id" class="form-control" type="hidden">
+                        </div>
+                     
+                        <div class="row">
+                          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <label>Nom Catégorie<span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="nom catégorie" formControlName="Nom"
+                              required>
+                            <small class="form-text text-danger"
+                              *ngIf="!register.get('Nom_categorie').valid && register.get('Nom_categorie').touched"> Nom is
+                              required</small>
+                          </div>
+                      
+                        </div>
+                        
+                        
+                       
+                       
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary" [disabled]="!register.valid">Ajouter</button>
+                          <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fermer</button>
+                        </div>
+                      </form>
+                    </div>
+                  </ng-template>
+                  <!-- Edit Record Modal Window -->
+                  <ng-template #editRecord let-modal>
+                    <div class="modal-header editRowModal">
+                      <h4 class="modal-title" id="modal-basic-title">
+                        <div class="table-modal-header">
+                          <!--<img [src]='selectedRowData?.img' alt="avatar">-->
+                          <div class="modal-about">
+                            <div class="fw-bold p-t-10 font-17">
+                                {{selectedRowData?.Nom_categorie}}
+                              </div>
+                          </div>
+                        </div>
+                      </h4>
+                      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true"><i class="material-icons">close</i></span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
+                        <div class="input-field col s12 d-none">
+                            <input formControlName="id" class="form-control" type="hidden">
+                          </div>
+                         <!-- <div class="input-field col s12 d-none">
+                            <input formControlName="img" class="form-control" type="hidden">
+                          </div>-->
+                          <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                              <label>Nom Catégorie<span class="text-danger">*</span></label>
+                              <input type="text" class="form-control" placeholder="nom matière" formControlName="Nom"
+                                required>
+                              <small class="form-text text-danger"
+                                *ngIf="!register.get('Nom_categorie').valid && register.get('Nom_categorie').touched"> Nom is
+                                required</small>
+                            </div>
+                        
+                          </div>
+                          
+                          
+                        
+                        
+                        
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Enregistrer</button>
+                          <button type="button" class="btn btn-light" (click)="modal.close()">Fermer</button>
+                        </div>
+                      </form>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+ 

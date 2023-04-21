@@ -1,0 +1,68 @@
+[{
+    "id": 1,
+    "NomC": "Money",
+    "typeC": "cours",
+    "chapitre": "We Learn To Give",
+    "enseig": "Hamadi Mohamed",
+    "formatC": "PDF",
+    "dureeC": "-",
+    "lienCours": "https://www.einfosoft.com/templates/admin/oreva",
+   
+    "NbSousParties": "10",
+    "NbDevoirs": "4",
+    "NbExercices": "4",
+    "NbQcm": "2"
+ 
+  },
+  {
+    "id": 2,
+    "NomC": "Notion de Fonction-Définition",
+    "typeC": "exercice",
+   
+    "chapitre": "probabilité",
+    "enseig": "Ali Mohamed",
+    "formatC": "PDF",
+    "dureeC": "-",
+    "lienCours": "https://www.einfosoft.com/templates/admin/oreva/source/light/#/icons/material",
+    "NbSousParties": "4",
+    "NbDevoirs": "2",
+    "NbExercices": "3",
+    "NbQcm": "4"
+
+  },
+  {
+    "id": 3,
+    "NomC": "Notion de Fonction-Définition",
+    "typeC": "devoir",
+   
+    "chapitre": "probabilité",
+    "enseig": "Ali Mohamed",
+    "formatC": "PDF",
+    "dureeC": "-",
+    "lienCours": "https://www.einfosoft.com/templates/source/light/#/icons/material",
+    "NbSousParties": "6",
+    "NbDevoirs": "5",
+    "NbExercices": "7",
+    "NbQcm": "3"
+
+   
+  },
+  {
+    "id": 3,
+    "NomC": "Alms",
+    "typeC": "devoir",
+   
+    "chapitre": "probabilité",
+    "enseig": "Ali Mohamed",
+    "formatC": "PDF",
+    "dureeC": "-",
+    "lienCours": "https://www.einfosoft.com/templates/source/light/#/icons/material",
+    "NbSousParties": "6",
+    "NbDevoirs": "5",
+    "NbExercices": "7",
+    "NbQcm": "3"
+
+   
+  }
+
+]

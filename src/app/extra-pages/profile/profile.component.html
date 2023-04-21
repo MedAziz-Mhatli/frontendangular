@@ -1,0 +1,73 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+      <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0 text-primary"><a routerLink="/extra-pages/profile">Profil</a></h5>
+      </li>
+      <li class="breadcrumb-item"><a routerLink="/extra-pages/profile">Profil</a></li>
+    </ul>
+    <div class="section-body">
+    <h4 class="text-primary">Mon profil </h4>
+      <div class="row mt-sm-4" style="padding-left:10%">
+        <div class="col-12 col-md-12 col-lg-4">
+          <div class="card author-box">
+            <!----> 
+            <div class="card-header">
+                <div style="margin-left:75%;">
+                <a [routerLink]="['/edit']" onClick="false;" class="btn btn-outline-primary">
+                    Modifier
+                  </a>
+                </div>
+            </div>
+            <!---->
+            <div class="card-body">
+              <div class="author-box-center">
+                <img alt="image" src="assets/images/log.jpg" class="rounded-circle author-box-picture">
+                <div class="clearfix"></div>
+                <div class="author-box-name">
+                  <a href="#" onClick="false;">Sarah Smith</a>
+                </div>
+                <div class="author-box-job">3ème secondaire Mathématiques</div>
+              </div>
+              <div class="text-center">
+                <div class="author-box-description">
+                  <p><span class="text-primary">Id d'utilisateur: </span>0123456<br><span class="text-primary">N° téléphone: </span>99 123 456<br><span class="text-primary">Addresse: </span>Nabeul</p>
+                  
+                </div>
+                <div class="mb-2 mt-3">
+                  <div class="text-small fw-bold text-danger"><img alt="image" src="assets/images/offre.png">&nbsp;&nbsp;Pas d'offres</div>
+                </div>
+                <a [routerLink]="['/offres']" onClick="false;" class="btn btn-outline-primary">
+                  Consulter les offres
+                </a>
+
+                <div class="w-100 d-sm-none"></div>
+              </div>
+            </div>
+          </div>  
+        </div>
+        <div class="col-12 col-md-12 col-lg-6">
+          <div class="card">
+            <div class="row">
+            <div class="col">
+            <div class="padding-20">
+            <h6 class="text-primary">Paiement</h6>
+            <p><span class="text-primary"><b>Banque de l'Habitat</b></span><br><span class="text-primary"><b>Compte:</b></span>Elite academy <br><span class="text-primary"><b>RIB: </b></span>35 785 0000000123456 78</p><br>
+            <p><span class="text-primary"><b>Banque ATB</b></span><br><span class="text-primary"><b>Compte:</b></span>Elite academy <br><span class="text-primary"><b>RIB: </b></span>36 785 0000000123456 78</p><br>
+            <p><span class="text-primary"><b>Banque UIB</b></span><br><span class="text-primary"><b>Compte:</b></span>Elite academy <br><span class="text-primary"><b>RIB: </b></span>39 785 0000000123456 78</p><br>   
+            </div>
+            </div>
+            
+            <div class="col">
+                <div class="padding-20">
+                <p><span class="text-primary"><b>Votre solde actuel:&nbsp;</b></span><span class="text-danger"><b>&nbsp;0pts</b></span></p>
+                  <img src="assets/images/card4.png" alt="card4"><br><br>
+                  <a href="#"><button class="btn btn-outline-primary">Charger mon compte</button></a>
+               </div>
+               </div>
+               </div>
+               
+          </div> 
+        </div>
+      </div>
+    </div>
+  </section>

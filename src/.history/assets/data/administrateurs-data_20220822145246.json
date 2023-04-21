@@ -1,0 +1,25 @@
+[{
+    "id": 0,
+    "img": "assets/images/users/user-6.png",
+    "firstName": "Sahar",
+    "lastName": "Zaghdoudi",
+    "email": "sahar@ISE2022.com",
+    "phone":"+216 21 618 354",
+    "responsibility": "Gestion des COURS",
+    "address": "406 Mill Avenue",
+    "login":"Foulen 123",
+    "password":"123456"
+  },
+  {
+    "id": 2,
+    "img": "assets/images/users/user-6.png",
+    "firstName": "Med.Ali",
+    "lastName": "Tounsi",
+    "email": "ahmed44@test.com",
+    "phone":"25",
+    "responsibility": "Gestion des matières",
+    "address": "406 Mill Avenue",
+    "login":"Foulen 123",
+    "password":"123456"
+  }
+]

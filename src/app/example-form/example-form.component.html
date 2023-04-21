@@ -1,0 +1,18 @@
+<section class="main-content">
+    <div class="container" style="padding:100px;">
+    <form [formGroup]="registerExemple" (ngSubmit)="onSubmit()">
+
+        <label>Prénom <span class="text-danger">*</span></label>
+        <input type="text" class="form-control"
+         placeholder="Donner votre prénom"  name="nomTest" formControlName="nomTest" >
+        
+         <label>Nom <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" 
+        placeholder="Donner votre nom" 
+        name="prenomTest" 
+        formControlName="prenomTest" ><br>
+       
+        <button class="btn btn-primary">Post Data</button>
+    </form>
+</div>
+</section>

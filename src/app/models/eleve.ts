@@ -1,0 +1,25 @@
+export class Eleve {
+    id!:number
+    prenomEleve!:String
+    nomEleve!:String
+    sexeEleve!:String
+    dateNaissanceEleve!:Date
+    phoneEleve!:number
+    emailEleve!:String
+    rue!:String
+    loginEleve!:String
+    motPasseEleve!:String
+    //etatEleve!:boolean
+    //confirmMotPasseEleve!:String
+    photoEleve!:String
+    localite!:number
+    sectionNiveau!:number
+    gouvernorat!:number
+    delegation!:number
+    //codePostal!:number
+    //sectionNiveau!:number
+    //soldeEleve!:number
+    //acteNaissance!:String
+    //etatConfirmation!:boolean
+    //dateConfirmation!:String
+}

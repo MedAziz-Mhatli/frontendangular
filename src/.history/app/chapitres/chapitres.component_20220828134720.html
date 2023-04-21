@@ -1,0 +1,410 @@
+<section class="main-content">
+    <ul class="breadcrumb breadcrumb-style ">
+      <li class="breadcrumb-item">
+        <h5 class="page-title m-b-0">Chapitres</h5>
+      </li>
+      <li class="breadcrumb-item bcrumb-1">
+        <a routerLink="http://localhost:4200/#/Mati%C3%A8res">
+          <i class="fas fa-home font-17"></i></a>
+      </li>
+      <li class="breadcrumb-item" style="font-size: 15px;">A</li>
+      <li class="breadcrumb-item" style="font-size: 15px;">3ème Secondaire Mathématiques</li>
+    </ul>
+    <div class="section-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+          
+          <div class="card">
+
+            <div class="p-10">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="row m-0">
+                  
+                    <div class="col-lg-6 p-0">
+                      <div class="ngxTableHeader">
+                        <div class="table-search-area">
+                          <div>
+                            <label for="search-input"><i class="material-icons search-icon">search</i></label>
+                            <input placeholder="Chercher..." type="text"  class="browser-default search-field"
+                              (keyup)='filterDatatable($event)' aria-label="Search box">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 p-0">
+                      <div class="ngxTableHeader">
+                        <div class="header-buttons-left">
+                          <div class="icon-button-demo buttons">
+                            <button class="btn btn-icon icon-left btn-primary rounded-button"  (click)='addRow(addRecord)' style="margin-left: 20px;">
+                              <i class="material-icons">add</i>
+                            </button>
+                            <button [hidden]=!isRowSelected class="btn btn-icon icon-left btn-danger rounded-button"
+                              (click)='deleteSelected()'>
+                              <i class="material-icons">delete</i>
+                              
+                            </button>
+                           
+                          
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <ngx-datatable #table class="material" [rows]="data" [loadingIndicator]="loadingIndicator"
+                columnMode="force" [headerHeight]="60" [footerHeight]="80" rowHeight="auto" [limit]="10"
+                [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable" [selected]="selected"
+                [selectionType]="'checkbox'" (select)='onSelect($event)' (page)="onPage($event)">
+  
+                <ngx-datatable-column   [width]="40" [sortable]="false" [draggable]="false" [resizeable]="false"
+                  [canAutoResize]="false" [headerCheckboxable]="true"  [checkboxable]="true" >
+                </ngx-datatable-column>
+                -- Row Detail Template -->
+                <ngx-datatable-row-detail  style="overflow-y: scroll;" [rowHeight]="130"  #myDetailRow (toggle)="onDetailToggle($event)">
+                  <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                    <div style="padding-left:35px;">
+                      <div style="color: rgb(65, 65, 137);"><strong>Description</strong></div>
+                      <div>{{ row.Desc }}</div>
+                    </div>
+                    
+                   
+                      <div style="padding-left:35px;">
+                        <div style="color: rgb(65, 65, 137);"><strong>Nombre vidéos   </strong> <span class="badge badge-primary">{{ row.NbrVideos }}</span>
+                        </div>
+                       
+                      </div>
+                      <div style="padding-left:35px;">
+                        <div style="color: rgb(65, 65, 137);"><strong>Durée totale Vidéos   </strong> <span class="badge badge-primary">{{ row.dureeTotalVideo }}</span>
+                        </div>
+                       
+                      </div>
+                      <div style="padding-left:35px;">
+                        <div style="color: rgb(65, 65, 137);"><strong>Nombre cours   </strong> <span class="badge badge-primary">{{ row.NbrCours }}</span></div>
+                        
+                      </div>
+                  </ng-template>
+                  
+                </ngx-datatable-row-detail>
+
+                <!-- Column Templates -->
+                <ngx-datatable-column [width]="30" [resizeable]="false" [sortable]="false" [draggable]="false"
+                  [canAutoResize]="false">
+                  <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                    <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded"
+                      [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
+                      (click)="toggleExpandRow(row)">
+                    </a>
+                  </ng-template>
+                </ngx-datatable-column>
+               
+                <ngx-datatable-column [width]="320" name="Nom">
+                  <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                  
+                    <div class="name-col-style">
+                      <div>{{row.Name}}</div>
+                   
+                    </div>
+                  </ng-template>
+                </ngx-datatable-column>
+                
+               
+               
+             <!--   <ngx-datatable-column name="Enseignant" [width]="150" >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.Ens}}
+                    </ng-template>
+                    
+                  </ngx-datatable-column>-->
+                  <ngx-datatable-column name="Matière" [width]="150" ><!--[width]="100"-->
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.Matiere}}
+                    </ng-template>
+                    
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Trimestre" [width]="120">
+      
+
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.trimestre=='Trimestre 1'" class="badge-outline col-green">{{row.trimestre}}
+                      </div>
+                      <div *ngIf="row.trimestre=='Trimestre 2'" class="badge-outline col-red">{{row.trimestre}}
+                      </div>
+                      <div *ngIf="row.trimestre=='Trimestre 3'" class="badge-outline col-blue-grey">{{row.trimestre}}
+                      </div>
+                    </ng-template>
+  
+  
+                  </ngx-datatable-column>
+                  
+           
+                <ngx-datatable-column [width]="120" name="Actions" sortable="false" [width]="140">
+                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                    <span>
+                      <button class="btn btn-tbl-edit h-auto" (click)='editRow(row, rowIndex, editRecord)'>
+                        <i class="fas fa-pen"></i>
+                      </button>
+                      <button class="btn btn-tbl-delete h-auto" (click)='deleteSingleRow(row)'>
+                        <i class="far fa-trash-alt"></i>
+                      </button>
+                      <a href="http://localhost:4200/#/cours"><button class="btn btn-tbl-edit h-auto" >
+                        <i class="
+                        far fa-folder-open"></i>
+                      </button></a>
+                    </span>
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+              <!-- Add Record Modal Window -->
+              <ng-template #addRecord let-modal>
+                <div class="modal-header editRowModal">
+                  <h4 class="modal-title" id="modal-basic-title">
+                    <div class="table-modal-header">
+                      <img [src]='newUserImg' alt="avatar">
+                      <div class="modal-about">
+                        <div class="fw-bold p-t-10 font-17">
+                          Nouveau chapitre</div>
+                      </div>
+                    </div>
+                  </h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                    <span aria-hidden="true"><i class="material-icons">close</i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form class="register-form" [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
+                    <div class="input-field col s12 d-none">
+                      <input formControlName="id" class="form-control" type="hidden">
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <label>Nom chapitre<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Nom" formControlName="Name"
+                          required>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('Name').valid && register.get('Name').touched"> Nom is
+                          required</small>
+                      </div>
+                   
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <label>Description chapitre<span class="text-danger"></span></label>
+                        <textarea type="textarea" class="form-control" placeholder="Description"
+                          formControlName="Desc"></textarea>
+                      </div>
+                    </div>
+                  <!--<p class="text-primary"><b>Lien & Format</b></p>-->  
+                  
+                    <div class="row">
+                    <!--  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                        <label>Enseignant <span class="text-danger">*</span></label>
+                        <select class="form-control" formControlName="trimestre" required>
+                          <option value="" selected disabled>Selectionnez enseignant</option>
+                          <option *ngFor="let t of enseignants" [value]="t.value">
+                            {{t.value}}
+                          </option>
+                        </select>
+                     
+                      </div>-->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <label>Trimestre <span class="text-danger">*</span></label>
+                          <select class="form-control" formControlName="trimestre" required>
+                            <option value="" selected disabled>Selectionnez trimestre</option>
+                            <option *ngFor="let t of trimestres" [value]="t.value">
+                              {{t.value}}
+                            </option>
+                          </select>
+                       
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <label>Matière <span class="text-danger">*</span></label>
+                          <select class="form-control" formControlName="trimestre" required>
+                            <option value="" selected disabled>Selectionnez matière</option>
+                            <option *ngFor="let t of matieres" [value]="t.value">
+                              {{t.value}}
+                            </option>
+                          </select>
+                       
+                        </div>
+                       
+                      </div>
+                    
+                   
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" [disabled]="!register.valid">Ajouter</button>
+                      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fermer</button>
+                    </div>
+                  </form>
+                </div>
+              </ng-template>
+              <!-- Edit Record Modal Window -->
+              <ng-template #editRecord let-modal>
+                <div class="modal-header editRowModal">
+                  <h4 class="modal-title" id="modal-basic-title">
+                    <div class="table-modal-header">
+                      <!--<img [src]='selectedRowData?.img' alt="avatar">-->
+                      <div class="modal-about">
+                        <div class="fw-bold p-t-10 font-17">
+                          {{selectedRowData?.Name}}
+                          </div>
+                      </div>
+                    </div>
+                  </h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true"><i class="material-icons">close</i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
+                    <div class="input-field col s12 d-none">
+                      <input formControlName="id" class="form-control" type="hidden">
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <label>Nom chapitre<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="{{selectedRowData?.Name}}" formControlName="Name"
+                          required>
+                        <small class="form-text text-danger"
+                          *ngIf="!register.get('Name').valid && register.get('Name').touched"> Nom is
+                          required</small>
+                      </div>
+                   
+                    </div>
+                    <div class="row">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                        <label>Description chapitre<span class="text-danger"></span></label>
+                        <textarea type="textarea" class="form-control" placeholder="{{selectedRowData?.Desc}}"
+                          formControlName="Desc"></textarea>
+                      </div>
+                    </div>
+                  <!--<p class="text-primary"><b>Lien & Format</b></p>-->  
+                  
+                    <div class="row">
+                   <!-- <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                        <label>Enseignant <span class="text-danger">*</span></label>
+                        <select class="form-control" formControlName="Ens" required>
+                          <option value="" selected disabled>{{selectedRowData?.Ens}}</option>
+                          <option *ngFor="let t of enseignants" [value]="t.value">
+                            {{t.value}}
+                          </option>
+                        </select>
+                     
+                      </div>-->  
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <label>Trimestre <span class="text-danger">*</span></label>
+                          <select class="form-control" formControlName="trimestre" required>
+                            <option value="" selected disabled>{{selectedRowData?.trimestre}}</option>
+                            <option *ngFor="let t of trimestres" [value]="t.value">
+                              {{t.value}}
+                            </option>
+                          </select>
+                       
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <label>Matière <span class="text-danger">*</span></label>
+                          <select class="form-control" formControlName="Matiere" required>
+                            <option value="" selected disabled>{{selectedRowData?.Matiere}}</option>
+                            <option *ngFor="let t of matieres" [value]="t.value">
+                              {{t.value}}
+                            </option>
+                          </select>
+                       
+                        </div>
+                       
+                      </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Enregistrer</button>
+                      <button type="button" class="btn btn-light" (click)="modal.close()">Fermer</button>
+                    </div>
+                  </form>
+                </div>
+              </ng-template>
+              
+                
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="card">
+                <div class="body">
+                  <div id="mail-nav">
+                    <br>
+                    <h5 class="b-b p-10 text-strong">Filtrer</h5>
+                    <div ngbDropdown  id="mail-folders">
+                      <button class="btn  btn-outline-primary msr-1 " id="dropdownBasic1" style="width:100%;" ngbDropdownToggle> Trimestre 1 
+        </button>
+       <!--<button class="btn  btn-outline-primary msr-1 " id="dropdownBasic1" style="width:250px;" ngbDropdownToggle>Par trimestre
+        </button>--> 
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button class="dropdown-item">Toutes les trimestres</button>
+                        <button class="dropdown-item">Trimestre 1</button>
+                        <button class="dropdown-item">Trimestre 2</button>
+                        <button class="dropdown-item">Trimestre 3</button>
+                      </div></div>
+                      <br>
+                      <div ngbDropdown  id="mail-folders">
+                        <button class="btn btn-outline-primary msr-1" id="dropdownBasic1" style="width: 100%;" ngbDropdownToggle>7 ème De base
+          </button>
+          <!--<button class="btn btn-outline-primary msr-1" id="dropdownBasic1" style="width: 250px;" ngbDropdownToggle>Par niveau
+          </button>-->
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button class="dropdown-item">Tous les niveaux</button>
+                          <button class="dropdown-item">7 ème De base</button>
+                          <button class="dropdown-item">8 ème De base</button>
+                          <button class="dropdown-item">9 ème De base</button>
+                          <button class="dropdown-item">1 ère Secondaire</button>
+                          <button class="dropdown-item">2 ème Secondaire Scientifique</button>
+                          <button class="dropdown-item">3 ème Secondaire Economie</button>
+                          <button class="dropdown-item">3 ème Secondaire Mathématiques</button>
+                          <button class="dropdown-item">4 ème Secondaire Sciences Exp</button>
+                          <button class="dropdown-item">4 ème Secondaire Techniques</button>
+                        </div></div>
+                   
+                    <h5 class="b-b p-10 text-strong">Matières</h5>
+                    <ul class="" id="mail-folders">
+                    <li class="active">
+                      <!--<a routerLink="/email/inbox" title="Inbox">Inbox 
+                      </a>-->
+                      <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Français</a>
+    
+                    </li>
+                    <li>
+                      <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Anglais</a>
+                    </li>
+                    <li>
+                      <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Maths</a>
+                    </li>
+                    <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Arabe</a>
+                      </li>
+                      <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>physique</a>
+                      </li>
+                       <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Chimie</a>
+                      </li>
+                      <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Informatique</a>
+                      </li>
+                      <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Philosophie</a>
+                      </li>
+                      <li>
+                        <a onClick="return false;" title="voir"><i class="fas fa-chevron-right" style="font-size: 10px;color: rgb(233, 173, 144);">&nbsp;&nbsp;</i>Sciences Naturelles</a>
+                      </li>
+    
+                  </ul>
+                 
+                   
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

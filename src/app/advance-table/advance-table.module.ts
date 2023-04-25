@@ -5,7 +5,6 @@ import { AdvanceTableRoutingModule } from './advance-table-routing.module';
 import { AdvanceTableComponent } from './advance-table.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AdvanceTableComponent],
@@ -14,10 +13,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     AdvanceTableRoutingModule,
-    NgxDatatableModule,NgbModule,
+    NgxDatatableModule,
     ToastrModule.forRoot(),
   ],
 })
-export class AdvanceTableModule {
-  
-}
+export class AdvanceTableModule {}

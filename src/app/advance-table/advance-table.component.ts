@@ -6,15 +6,9 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { NgbModal, NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { ChapitresService } from '../services/chapitres.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-import { Chapitres } from '../models/Chapitres';
-import { MatieresService } from '../services/matieres.service';
 
 @Component({
   selector: 'app-advance-table',
@@ -23,138 +17,252 @@ import { MatieresService } from '../services/matieres.service';
   providers: [ToastrService],
 })
 export class AdvanceTableComponent implements OnInit {
-  types: any;
-  Chapitres:Chapitres= new Chapitres();
-  cours: Object;
-  devoirs: Object;
-  exercices: Object;
-  qcm: Object;
+  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+  rows = [];
+  scrollBarHorizontal = window.innerWidth < 1200;
+  selectedRowData: selectRowInterface;
+  newUserImg = 'assets/images/users/user-2.png';
+  data = [];
+  filteredData = [];
+  editForm: FormGroup;
+  register: FormGroup;
+  loadingIndicator = true;
+  isRowSelected = false;
+  selectedOption: string;
+  reorderable = true;
+  public selected: any[] = [];
+  columns = [
+    { name: 'First Name' },
+    { name: 'Last Name' },
+    { name: 'Designation' },
+    { name: 'Gender' },
+    { name: 'Phone' },
+    { name: 'Email' },
+    { name: 'Status' },
+    { name: 'Address' },
+  ];
+  genders = [
+    { id: '1', value: 'male' },
+    { id: '2', value: 'female' },
+  ];
+  statusType = [
+    { id: '1', value: 'Active' },
+    { id: '2', value: 'Completed' },
+    { id: '3', value: 'Pending' },
+  ];
+  designationType = [
+    { id: '1', value: 'Manager' },
+    { id: '2', value: 'Team Leader' },
+    { id: '3', value: 'Clerk' },
+  ];
+  @ViewChild(DatatableComponent, { static: false }) table2: DatatableComponent;
+  constructor(
+    private fb: FormBuilder,
+    private modalService: NgbModal,
+    private toastr: ToastrService
+  ) {
+    this.editForm = this.fb.group({
+      id: new FormControl(),
+      img: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      designation: new FormControl(),
+      phone: new FormControl(),
+      email: new FormControl(),
+      status: new FormControl(),
+      gender: new FormControl(),
+      address: new FormControl(),
+    });
+    window.onresize = () => {
+      this.scrollBarHorizontal = window.innerWidth < 1200;
+    };
+  }
+  // select record using check box
+  onSelect({ selected }) {
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
 
-  constructor(private route:ActivatedRoute,public MatieresS: MatieresService,public ChappitresS: ChapitresService, private router:Router,private http:HttpClient) { 
-    this.route.params.subscribe((params=>{
-      if(params['chapitreId']){
-       // console.log(params['matiereId']);
-       this.readTypesCours();
-        this.getChapitre(params['chapitreId']);
-         this.readCours(params['chapitreId']);
-         this.readDevoirs(params['chapitreId']);
-         this.readEx(params['chapitreId']);
-         this.readQcm(params['chapitreId']);      
+    if (this.selected.length === 0) {
+      this.isRowSelected = false;
+    } else {
+      this.isRowSelected = true;
+    }
+  }
+  deleteSelected() {
+    Swal.fire({
+      title: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonColor: '#8963ff',
+      cancelButtonColor: '#fb7823',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.value) {
+        this.selected.forEach((row) => {
+          this.deleteRecord(row);
+        });
+        this.deleteRecordSuccess(this.selected.length);
+        this.selected = [];
+        this.isRowSelected = false;
       }
-    }));
-   
+    });
   }
-  active;
-
-
-  active2 = 'top';
-  active3;
-
-  active4;
-  disabled = true;
-
-  acc: any;
-  disabledd = false;
-
- 
-
-  onNavChange(changeEvent: NgbNavChangeEvent) {
-    if (changeEvent.nextId === 3) {
-      changeEvent.preventDefault();
-    }
+  ngOnInit() {
+    this.fetch((data) => {
+      this.data = data;
+      this.filteredData = data;
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 500);
+    });
+    this.register = this.fb.group({
+      id: [''],
+      img: [''],
+      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]+')]],
+      lastName: [''],
+      designation: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      email: [
+        '',
+        [Validators.required, Validators.email, Validators.minLength(5)],
+      ],
+      status: ['', [Validators.required]],
+      address: [''],
+    });
   }
-
-  toggleDisabled() {
-    this.disabled = !this.disabled;
-    if (this.disabled) {
-      this.active3 = 1;
-    }
+  // fetch data
+  fetch(cb) {
+    const req = new XMLHttpRequest();
+    req.open('GET', 'assets/data/adv-tbl-data.json');
+    req.onload = () => {
+      const data = JSON.parse(req.response);
+      cb(data);
+    };
+    req.send();
   }
-  getChapitre(chapitreId:string){
-    this.ChappitresS.details(chapitreId).pipe(
-     map(data => {
-       const res: any = data;
-       console.log(res);
-       return res ? res : [];
- 
-     })).subscribe((Chapitres)=>console.log(Chapitres));
-   }
- 
-
-  readTypesCours(): any {
-    this.ChappitresS.getTypesCours()
-      .subscribe(
-        data => {
-          this.types = data
-
-        
-         console.log( data);
-          
-        },
-        error => {
-          console.log(error);
-        });
+  // add new record
+  addRow(content) {
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
+    });
+    this.register.patchValue({
+      id: this.getId(10, 100),
+      img: this.newUserImg,
+    });
   }
-  readCours(chapitreId: string): any {
-    this.ChappitresS.cours(chapitreId)
-      .subscribe(
-        data => {
-          this.cours = data
-
-        
-         console.log( data);
-          
-        },
-        error => {
-          console.log(error);
-        });
+  // edit record
+  editRow(row, rowIndex, content) {
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
+    });
+    this.editForm.setValue({
+      id: row.id,
+      img: row.img,
+      firstName: row.firstName,
+      lastName: row.lastName,
+      designation: row.designation,
+      phone: row.phone,
+      email: row.email,
+      gender: row.gender,
+      status: row.status,
+      address: row.address,
+    });
+    this.selectedRowData = row;
   }
-  readDevoirs(chapitreId: string): any {
-    this.ChappitresS.devoirs(chapitreId)
-      .subscribe(
-        data => {
-          this.devoirs = data
-
-        
-         console.log( data);
-          
-        },
-        error => {
-          console.log(error);
-        });
-  }
-  readEx(chapitreId: string): any {
-    this.ChappitresS.exercices(chapitreId)
-      .subscribe(
-        data => {
-          this.exercices = data
-
-        
-         console.log( data);
-          
-        },
-        error => {
-          console.log(error);
-        });
-  }
-  readQcm(chapitreId: string): any {
-    this.ChappitresS.qcm(chapitreId)
-      .subscribe(
-        data => {
-          this.qcm = data
-
-        
-         console.log( data);
-          
-        },
-        error => {
-          console.log(error);
-        });
+  // delete single row
+  deleteSingleRow(row) {
+    Swal.fire({
+      title: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonColor: '#8963ff',
+      cancelButtonColor: '#fb7823',
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.value) {
+        this.deleteRecord(row);
+        this.deleteRecordSuccess(1);
+      }
+    });
   }
 
-  ngOnInit(): void {
-   
+  deleteRecord(row) {
+    this.data = this.arrayRemove(this.data, row.id);
+  }
+  arrayRemove(array, id) {
+    return array.filter(function (element) {
+      return element.id !== id;
+    });
+  }
+  // save add new record
+  onAddRowSave(form: FormGroup) {
+    this.data.push(form.value);
+    this.data = [...this.data];
+    form.reset();
+    this.modalService.dismissAll();
+    this.addRecordSuccess();
+  }
+  // save record on edit
+  onEditSave(form: FormGroup) {
+    this.data = this.data.filter((value, key) => {
+      if (value.id == form.value.id) {
+        value.firstName = form.value.firstName;
+        value.lastName = form.value.lastName;
+        value.designation = form.value.designation;
+        value.phone = form.value.phone;
+        value.gender = form.value.gender;
+        value.email = form.value.email;
+        value.status = form.value.status;
+        value.address = form.value.address;
+      }
+      this.modalService.dismissAll();
+      return true;
+    });
+    this.editRecordSuccess();
+  }
+  // filter table data
+  filterDatatable(event) {
+    // get the value of the key pressed and make it lowercase
+    const val = event.target.value.toLowerCase();
+    // get the amount of columns in the table
+    const colsAmt = this.columns.length;
+    // get the key names of each column in the dataset
+    const keys = Object.keys(this.filteredData[0]);
+    // assign filtered matches to the active datatable
+    this.data = this.filteredData.filter(function (item) {
+      // iterate through each row's column data
+      for (let i = 0; i < colsAmt; i++) {
+        // check for a match
+        if (
+          item[keys[i]].toString().toLowerCase().indexOf(val) !== -1 ||
+          !val
+        ) {
+          // found match, return true to add to result set
+          return true;
+        }
+      }
+    });
+    // whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
+  }
+  // get random id
+  getId(min, max) {
+    // min and max included
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+  addRecordSuccess() {
+    this.toastr.success('Add Record Successfully', '');
+  }
+  editRecordSuccess() {
+    this.toastr.success('Edit Record Successfully', '');
+  }
+  deleteRecordSuccess(count) {
+    this.toastr.error(count + ' Records Deleted Successfully', '');
   }
 }
-
-
+export interface selectRowInterface {
+  img: String;
+  firstName: String;
+  lastName: String;
+}

@@ -40,9 +40,10 @@ export class SigninComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res) {
-              
-              
+              const token = this.authService.currentUserValue.token;
+              if (token) {
                 this.router.navigate(['/dashboard/main']);
+              }
             } else {
               this.error = 'Invalid Login';
             }

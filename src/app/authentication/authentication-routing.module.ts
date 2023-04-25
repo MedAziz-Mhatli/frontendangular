@@ -6,10 +6,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
-import { InscriptionEleveComponent } from './inscription-eleve/inscription-eleve.component';
-//import { InscriptionEleveComponent } from './inscription-eleve/inscription-eleve.component';
-//import { InscriptionParentComponent } from './inscription-parent/inscription-parent.component';
-
+import {VerificationComponent} from "./verification/verification.component";
 const routes: Routes = [
   {
     path: '',
@@ -29,7 +26,7 @@ const routes: Routes = [
     component: ForgotComponent,
   },
   {
-    path: 'reset',
+    path: 'reset/:code/:email',
     component: ResetComponent,
   },
   {
@@ -41,15 +38,9 @@ const routes: Routes = [
     component: Page500Component,
   },
   {
-    path: 'inscriptionEleve',
-    component: InscriptionEleveComponent,
+    path: 'verification/:id',
+    component: VerificationComponent,
   },
-  //{
-   // path: 'insciptionParent',
-   // component: InscriptionParentComponent,
-  //},
-
-
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -18,7 +18,7 @@ export class ConfigService {
         theme_color: 'white', // options:  white, cyan, black, purple, orange, green, red
         sidebar: {
           collapsed: false, // options:  true & false
-          backgroundColor: 'dark', // options:  light & dark
+          backgroundColor: 'light', // options:  light & dark
         },
       },
     };

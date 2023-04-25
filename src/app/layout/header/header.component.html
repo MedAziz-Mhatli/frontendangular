@@ -1,17 +1,18 @@
-<nav class="navbar navbar-expand-lg main-navbar sticky" style="background-color: #34654e86;">
+<nav class="navbar navbar-expand-lg main-navbar sticky">
   <div class="form-inline me-auto">
     <ul class="navbar-nav msr-3">
       <li>
         <a data-toggle="sidebar" class="nav-link nav-link-lg
 									collapse-btn" (click)="mobileMenuSidebarOpen($event,'overlay-open')">
-          <i-feather name="menu" ></i-feather>
+          <!--<i-feather name="menu"></i-feather>-->
+          <i class="fas fa-align-justify"></i>
         </a></li>
       <li>
         <form class="form-inline me-auto">
           <div class="search-element d-flex">
-            <input class="form-control" type="search" placeholder="Chercher..."
-              aria-label="Search" data-width="900">
-            <button class="btn" type="submit" >
+            <input class="form-control" type="search" placeholder="{{'HEADER.SEARCH.TEXT' | translate}}"
+              aria-label="Search" data-width="200">
+            <button class="btn" type="submit">
               <i class="fas fa-search"></i>
             </button>
           </div>
@@ -22,7 +23,8 @@
   <ul class="navbar-nav navbar-right">
     <li> <a class="nav-link nav-link-lg
       collapse-btn" (click)="callFullscreen()">
-        <i-feather name="maximize" class="icon"></i-feather>
+       <!-- <i-feather name="maximize"></i-feather>-->
+       <i class="fas fa-expand"></i>
       </a>
     </li>
 
@@ -42,7 +44,8 @@
 
     <li ngbDropdown class="dropdown dropdown-list-toggle"><a ngbDropdownToggle data-toggle="dropdown"
         class="nav-link nav-link-lg message-toggle remove-caret">
-        <i-feather name="mail" class="mailAnim1 collapse-btn"></i-feather>
+        <!--<i-feather name="mail" class="mailAnim1 collapse-btn"></i-feather>-->
+        <i class="fas fa-envelope-square"></i>
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right dropdown-list header-dropdown pullDown">
         <div class="dropdown-header">
@@ -105,7 +108,8 @@
 
     <li ngbDropdown class="dropdown dropdown-list-toggle"><a ngbDropdownToggle data-toggle="dropdown"
         class="nav-link nav-link-lg message-toggle remove-caret">
-        <i-feather name="bell" class="bell collapse-btn" style="color: white;"></i-feather>
+       <!--<i-feather name="bell" class="bell collapse-btn"></i-feather>--> 
+        <i class="far fa-bell"></i>
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right dropdown-list header-dropdown pullDown">
         <div class="dropdown-header">
@@ -151,30 +155,27 @@
         </div>
       </div>
     </li>
-    <!-- -->
+
+
     <li ngbDropdown><a ngbDropdownToggle data-toggle="dropdown"
-      class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-      <img alt="image" src="assets/images/user.png" class="user-img-radious-style collapse-btn"> <span
-        class="d-sm-none d-lg-inline-block"></span></a>
-    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
-      <div class="dropdown-title">Hello Chayma..</div>
-      <a routerLink="/extra-pages/profile" class="dropdown-item has-icon"> <i class="far
-            fa-user"></i> Profile
-      </a> <a routerLink="/email/inbox" class="dropdown-item has-icon"> <i class="far fa-envelope"></i>
-        Email
-      </a> <a href="" onClick="return false;" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-        Paramètres
-      </a>
-      <div class="dropdown-divider"></div>
-      <a href="javascript:void(0);" class="dropdown-item has-icon text-danger" (click)="logout()"> <i
-          class="fas fa-sign-out-alt"></i>
-        Deconnexion
-      </a>
-    </div>
-  </li>
-  <!---->
-
-
-    
+        class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <img alt="image" src="assets/images/user.png" class="user-img-radious-style collapse-btn"> <span
+          class="d-sm-none d-lg-inline-block"></span></a>
+      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
+        <div class="dropdown-title">Hello Sarah..</div>
+        <a routerLink="/extra-pages/profile" class="dropdown-item has-icon"> <i class="far
+              fa-user"></i> Profile
+        </a> <a routerLink="/email/inbox" class="dropdown-item has-icon"> <i class="far fa-envelope"></i>
+          Email
+        </a> <a href="" onClick="return false;" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
+          Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="javascript:void(0);" class="dropdown-item has-icon text-danger" (click)="logout()"> <i
+            class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </div>
+    </li>
   </ul>
 </nav>

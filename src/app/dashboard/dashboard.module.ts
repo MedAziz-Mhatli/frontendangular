@@ -8,21 +8,18 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { Dashboard2Component } from './dashboard2/dashboard2.component';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { RouterModule } from '@angular/router';
-import { MapToIterable } from '../dashboard/main/PropertiesPipe';
-
 @NgModule({
-  declarations: [MainComponent, Dashboard2Component,MapToIterable],
-  exports: [RouterModule,MapToIterable],
+  declarations: [MainComponent, Dashboard2Component],
   imports: [
     CommonModule,
     NgbModule,
     DashboardRoutingModule,
-   
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
     PerfectScrollbarModule,
     NgApexchartsModule,
-    NgxGaugeModule,NgxDatatableModule,NgbModule,
+    NgxGaugeModule,
   ],
 })
 export class DashboardModule {}

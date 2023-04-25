@@ -17,9 +17,6 @@ export class AppComponent {
     this._router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationStart) {
         this.spinner.show();
-        location.onPopState(() => {
-          window.location.reload();
-        });
         this.currentUrl = routerEvent.url.substring(
           routerEvent.url.lastIndexOf('/') + 1
         );

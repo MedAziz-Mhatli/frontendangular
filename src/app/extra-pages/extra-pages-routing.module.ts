@@ -1,38 +1,32 @@
 import { BlankComponent } from './blank/blank.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { InvoiceComponent } from './invoice/invoice.component';
 import { ProfileComponent } from './profile/profile.component';
-import { OffresComponent } from './offres/offres.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
+import { FaqsComponent } from './faqs/faqs.component';
 
 const routes: Routes = [
-  {
-    path: 'blank',
-    component: BlankComponent,
-  },
   {
     path: 'profile',
     component: ProfileComponent,
   },
-  //Component Editer profile
   {
-    path: 'edit',
-    component: EditProfileComponent,
-
+    path: 'pricing',
+    component: PricingComponent,
   },
-  //Component Offres
   {
-    path: 'offres',
-    component: OffresComponent,
+    path: 'invoice',
+    component: InvoiceComponent,
   },
-  
-  //Component Porte monnaie
-  
-  
-  
-
+  {
+    path: 'faqs',
+    component: FaqsComponent,
+  },
+  {
+    path: 'blank',
+    component: BlankComponent,
+  },
 ];
 
 @NgModule({

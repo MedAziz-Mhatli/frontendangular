@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MapToIterable } from './dashboard/main/PropertiesPipe';
-import { ArchwizardModule } from 'angular-archwizard';
-import { NgSelectModule } from '@ng-select/ng-select';
+
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-//import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,41 +28,12 @@ import {
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
 import {
   HttpClientModule,
   HTTP_INTERCEPTORS,
   HttpClient,
 } from '@angular/common/http';
-import { NgbModule,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { AnglaisComponent } from './anglais/anglais.component';
-import { ElevesComponent } from './eleves/eleves.component';
-
-/**/
-import { FormsModule,  } from '@angular/forms';
-//import { ToastrModule } from 'ngx-toastr';
-import { AdministrateursComponent } from './administrateurs/administrateurs.component';
-import { ParentsComponent } from './parents/parents.component';
-import { EnseignantsComponent } from './enseignants/enseignants.component';
-import { EleveFormComponent } from './eleve-form/eleve-form.component';
-import { HistoriqueAbonnementsComponent } from './historique-abonnements/historique-abonnements.component';
-import { EnseignantFormComponent } from './enseignant-form/enseignant-form.component';
-import { ParentFormComponent } from './parent-form/parent-form.component';
-import { AdminFormComponent } from './admin-form/admin-form.component';
-
-/**/
-
-
-import { FichesComponent } from './gestion/fiches/fiches.component';
-import { FichesMComponent } from './fiches-m/fiches-m.component';
-import { ToastrModule } from 'ngx-toastr';
-import { ChapitresComponent } from './chapitres/chapitres.component';
-import { GeneraleComponent } from './generale/generale.component';
-import { PipePipe } from './pipe.pipe';
-import { CategorieComponent } from './categorie/categorie.component';
-import { ProduitsComponent } from './produits/produits.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: false,
@@ -84,27 +53,6 @@ export function createTranslateLoader(http: HttpClient): any {
     AuthLayoutComponent,
     MainLayoutComponent,
     FooterComponent,
-    AnglaisComponent,
-    PipePipe,
-
-    ElevesComponent,
-    AdministrateursComponent,
-    ParentsComponent,
-    EnseignantsComponent,
-    EleveFormComponent,
-    HistoriqueAbonnementsComponent,
-    EnseignantFormComponent,
-    ParentFormComponent,
-    AdminFormComponent,
-  
-    FichesComponent,
-    FichesMComponent,
-    ChapitresComponent,
-    ProduitsComponent,
-    CategorieComponent,
-    GeneraleComponent,
-    PipePipe,
-    
   ],
   imports: [
     BrowserModule,
@@ -113,17 +61,6 @@ export function createTranslateLoader(http: HttpClient): any {
     HttpClientModule,
     ReactiveFormsModule,
     PerfectScrollbarModule,
-    ArchwizardModule,NgSelectModule,
-    //NgxDatatableModule,
-    /**/
-    NgxDatatableModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ToastrModule.forRoot(),
-    /**/
-
-    NgxDatatableModule,
-    ToastrModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -134,9 +71,9 @@ export function createTranslateLoader(http: HttpClient): any {
     // core & shared
     CoreModule,
     SharedModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [NgbActiveModal,
+  providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     {
       provide: PERFECT_SCROLLBAR_CONFIG,

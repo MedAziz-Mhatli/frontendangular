@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './layout/app-layout/main-layout/main-layout
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/guard/auth.guard';
+import {PermissionGuard} from "./core/guard/permission.guard";
 const routes: Routes = [
   {
     path: '',
@@ -12,11 +13,15 @@ const routes: Routes = [
       { path: '', redirectTo: '/authentication/signin', pathMatch: 'full' },
       {
         path: 'dashboard',
+        canActivate: [PermissionGuard],
+        data: { role: "ROLE_ADMIN" },
         loadChildren: () =>
           import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
       },
       {
         path: 'advance-table',
+        canActivate: [PermissionGuard],
+        data: { role: "ROLE_VENDEUR" },
         loadChildren: () =>
           import('./advance-table/advance-table.module').then(
             (m) => m.AdvanceTableModule
@@ -117,6 +122,8 @@ const routes: Routes = [
   {
     path: 'authentication',
     component: AuthLayoutComponent,
+    canActivate: [PermissionGuard],
+    data: { role: "NOT_CONNECTED" },
     loadChildren: () =>
       import('./authentication/authentication.module').then(
         (m) => m.AuthenticationModule

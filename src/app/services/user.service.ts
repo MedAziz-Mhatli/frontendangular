@@ -20,11 +20,9 @@ export class UserService {
       alert("Success!");
     });
   }
-
   verify(code: string){
     return this.http.get(this.url + '/signup/verify?code=' + code);
   }
-
   forgetPassword(email: string){
     this.user = new User();
     this.user.email = email;
@@ -42,5 +40,8 @@ export class UserService {
       // @ts-ignore
       alert(res.message);
     });
+  }
+  signIn(email: string, password: string){
+
   }
 }

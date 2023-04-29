@@ -5,9 +5,10 @@ export class User {
   fullname?: string;
   adresse?: string;
   email?: string;
+  roles?: string[];
   role?: string;
   firstName: string;
   lastName: string;
   verified?: boolean;
-  token: string;
+  accessToken: string;
 }

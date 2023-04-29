@@ -12,41 +12,31 @@
                    <img src="assets/images/logo.png" alt="logo" class="logo"><span class="logo-name">Oreva</span>
                  </div>
                </div>
-               <form class="validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+               <form class="validate-form" #f="ngForm" >
                  <div class="row">
                    <div class="col-lg-12">
                      <div class="form-group position-relative">
                        <label>Your Email <span class="text-danger">*</span></label>
-                       <input type="email" class="form-control psl-5" formControlName="username" placeholder="Email">
+                       <input type="email" class="form-control psl-5" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" placeholder="Email">
                      </div>
                    </div>
 
                    <div class="col-lg-12">
                      <div class="form-group position-relative">
                        <label>Password <span class="text-danger">*</span></label>
-                       <input type="password" class="form-control psl-5" formControlName="password"
-                         placeholder="Password">
+                       <input type="password" class="form-control psl-5" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="Password">
                      </div>
                    </div>
 
                    <div class="col-lg-12">
                      <div class="d-flex justify-content-between">
-                       <div class="form-group">
-                         <div class="form-check">
-                           <input class="form-check-input" type="checkbox" id="customCheck1"
-                             formControlName="termcondition">
-                           <label class="form-check-label" for="customCheck1">
-                             Remember me
-                           </label>
-                         </div>
-                       </div>
                        <p class="forgot-pass mb-0"><a routerLink="/authentication/forgot"
                            class="text-dark fw-bold">Forgot password ?</a></p>
                      </div>
                    </div>
                    <div *ngIf="error" class="alert alert-danger mb-3 msl-3">{{error}}</div>
                    <div class="col-lg-12 mb-0">
-                     <button class="btn btn-primary auth-form-btn">Sign in</button>
+                     <button class="btn btn-primary auth-form-btn" (click)="onSubmit()">Sign in</button>
                    </div>
                    <div class="col-lg-12 mt-4 text-center">
                      <h6>Or Login With</h6>

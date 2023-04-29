@@ -18,7 +18,7 @@ const users: User[] = [
     password: 'admin@123',
     firstName: 'Sarah',
     lastName: 'Smith',
-    token: 'admin-token',
+    accessToken: 'admin-token',
   },
 ];
 
@@ -57,7 +57,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
-        token: user.token,
+        token: user.accessToken,
       });
     }
 

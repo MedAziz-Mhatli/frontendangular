@@ -1,0 +1,86 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Filtering</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Data Table</li>
+    <li class="breadcrumb-item">Filtering</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Search and Filtering</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                    <div class="d-flex">
+                      <label class="col-form-label msr-3">Search:</label>
+                      <input type="text" class="form-control" (keyup)='updateFilter($event)'>
+                    </div>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                  columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                   [reorderable]="reorderable">
+                  <ngx-datatable-column [width]="100" name="Name">
+                    <ng-template let-row="row" let-value="value" let-i="index" ngx-datatable-cell-template>
+                      <div class="name-col-style">
+                        <div>{{row.fullname}}</div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Email"[width]="300">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.email}}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Adress">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{row.adresse}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.verified==true" class="badge-outline col-green">Verified
+                      </div>
+                      <div *ngIf="row.verified==false" class="badge-outline col-red">Not verified
+                      </div>
+
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Role">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.roles[0].name=='ROLE_ADMIN'">Admin</div>
+                      <div *ngIf="row.roles[0].name=='ROLE_USER'">User</div>
+                      <div *ngIf="row.roles[0].name=='ROLE_VENDEUR'">Vendeur</div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Actions" sortable="false">
+                    <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                      <a class="msr-2 h-auto tblEditBtn"(click)="goto(row.id)">
+                        <i class="fas fa-pen"></i>
+                      </a>
+                      <a class="h-auto tblDelBtn" (click)="delete(row.id)">
+                        <i class="far fa-trash-alt"></i>
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

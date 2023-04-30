@@ -1,0 +1,191 @@
+<main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
+  <div class="container register-container">
+    <div class="card register-card">
+      <div class="row no-gutters">
+        <div class="col-md-6">
+          <img src="assets/images/register.jpg" alt="register" class="register-card-img">
+        </div>
+        <div class="col-md-6">
+          <div class="register-body">
+            <div class="text-center">
+              <div class="brand-wrapper">
+                <img src="assets/images/logo.png" alt="logo" class="logo"><span class="logo-name">Oreva</span>
+              </div>
+            </div>
+            <form [formGroup]="signup">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label >Full name <span class="text-danger">*</span></label>
+                    <i name="user" class="login-icons"></i>
+                    <input type="text"
+                           class="form-control psl-5"
+                           name="Fullname"
+                           formControlName="fullname"
+                           placeholder="full name"
+                           >
+                  </div>
+                  <div *ngIf="signup.controls['fullname'].invalid&&(signup.controls['fullname'].dirty||signup.controls['fullname'].touched)">
+                    <div *ngIf="signup.controls['fullname'].errors?.['required']" 
+                    style="color: red;"
+                    >
+                      Full Name is required
+                    </div>
+                   </div>
+
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label >Username <span class="text-danger">*</span></label>
+                    <i name="user" class="login-icons"></i>
+                    <input type="text"
+                           class="form-control psl-5"
+                           name="username"
+                           formControlName="username"
+                           placeholder="Username"
+                           >
+                </div>
+                <div *ngIf="signup.controls['username'].invalid&&(signup.controls['username'].dirty||signup.controls['username'].touched)">
+                  <div *ngIf="signup.controls['username'].errors?.['required']" 
+                  style="color: red;"
+                  >
+                    username is required
+                  </div>
+                  <div *ngIf="signup.controls['username'].errors?.['minlength']" 
+                  style="color: red;"
+                  >
+                    min length is required 6
+                  </div>
+                </div>
+
+
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label>Email<span class="text-danger">*</span></label>
+                    <i name="mail" class="login-icons"></i>
+                    <input type="email" name="email" class="form-control psl-5" formControlName="email" placeholder="Email" required>
+                  </div>
+                  <div *ngIf="signup.controls['email'].invalid&&(signup.controls['email'].dirty||signup.controls['email'].touched)">
+                    <div *ngIf="signup.controls['email'].errors?.['required']" 
+                    style="color: red;"
+                    >
+                      email is required
+                    </div>
+                    <div *ngIf="signup.controls['email'].errors?.['email']" 
+                    style="color: red;"
+                    >
+                      please enter valid email address
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label>Password <span class="text-danger">*</span></label>
+                    <i name="key" class="login-icons"></i>
+                    <input type="password"  name="password" class="form-control psl-5" formControlName="password" placeholder="Password"
+                    >
+                  </div>
+                  <div *ngIf="signup.controls['password'].invalid&&(signup.controls['password'].dirty||signup.controls['password'].touched)">
+                    <div *ngIf="signup.controls['password'].errors?.['required']" 
+                    style="color: red;"
+                    >
+                      password is required
+                    </div>
+                    <div *ngIf="signup.controls['password'].errors?.['minlength']" 
+                    style="color: red;"
+                    >
+                      min length is required
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label >Addresse<span class="text-danger">*</span></label>
+                    <i name="adresse" class="login-icons"></i>
+                    <input type="text"
+                           class="form-control psl-5"
+                           name="adresse"
+                           formControlName="adresse"
+                           placeholder="Address"
+                           >
+                  </div>
+
+                  <div *ngIf="signup.controls['adresse'].invalid&&(signup.controls['adresse'].dirty||signup.controls['adresse'].touched)">
+                    <div *ngIf="signup.controls['adresse'].errors?.['required']" 
+                    style="color: red;"
+                    >
+                      adresse is required
+                    </div>
+                    <div *ngIf="signup.controls['adresse'].errors?.['minlength']" 
+                    style="color: red;"
+                    >
+                      min length is required
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
+                    <label>Role<span class="text-danger">*</span></label>
+                    <i name="adress" class="login-icons"></i>
+                    <select
+                      class="form-control psl-5"
+                      name="role"
+                      formControlName="role" required>
+                      <option value="user">User</option>
+                      <option value="vendeur">Vendeur</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                  <div *ngIf="signup.controls['role'].invalid&&(signup.controls['role'].dirty||signup.controls['role'].touched)">
+                    <div *ngIf="signup.controls['role'].errors?.['required']" 
+                    style="color: red;"
+                    >
+                      role is required
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="customCheck1" >
+                      <label class="form-check-label" for="customCheck1">
+                        I Accept <a href="javascript:void(0)" class="col-blue">Terms And Condition</a>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+<!--                <div *ngIf="error" class="alert alert-danger mb-3 msl-3">{{error}}</div>-->
+                <div class="col-md-12">
+                  <button class="btn btn-primary auth-form-btn" [disabled]="!signup.valid" (click)="onSubmit()">Register</button>
+                </div>
+                <div class="col-lg-12 mt-4 text-center">
+                  <h6>Or Signup With</h6>
+                  <ul class="list-unstyled social-icon mb-0 mt-3">
+                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                      </a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                      </a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                      </a></li>
+                    <li class="list-inline-item"><a href="javascript:void(0)" class="rounded">
+                      </a></li>
+                  </ul>
+                </div>
+                <div class="mx-auto">
+                  <p class="mb-0 mt-3"><small class="text-dark msr-2">Already have an account ?</small> <a
+                      routerLink="/authentication/signin" class="text-dark fw-bold">Sign in</a></p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+

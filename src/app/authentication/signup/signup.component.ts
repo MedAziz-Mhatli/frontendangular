@@ -11,14 +11,16 @@ import {UserService} from "../../services/user.service";
 })
 export class SignupComponent implements OnInit {
   user: User;
+  error: string;
   constructor(private authService: AuthService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.user = new User();
+    this.error = "";
   }
 
   onSubmit(){
-    console.log(this.user)
+    console.log(this.user);
     this.userService.postUser(this.user);
   }
 }

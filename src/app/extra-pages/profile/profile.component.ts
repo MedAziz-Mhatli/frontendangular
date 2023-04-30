@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../core/service/auth.service";
+import {User} from "../../core/models/user";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
   active;
-  constructor() {}
+  constructor(private authService: AuthService, private userService: UserService) {}
+  user: User;
+  ngOnInit(): void {
+    this.user = this.authService.currentUserValue;
+  }
 
-  ngOnInit(): void {}
+  onSubmit(){
+    // @ts-ignore
+    this.user.roles = [{name: this.user.roles[0]}];
+    console.log(this.user)
+    this.userService.update(this.user).subscribe((res)=>{
+      console.log(res);
+    });
+  }
 }

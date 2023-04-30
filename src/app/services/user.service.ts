@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from "../core/models/user";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {AuthService} from "../core/service/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class UserService {
   url = 'http://localhost:8080/api/auth';
   user: User;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {
   }
   postUser(user: User){
     return this.http.post(this.url + '/signup'  , user).subscribe((res: any) => {
@@ -41,7 +42,12 @@ export class UserService {
       alert(res.message);
     });
   }
-  signIn(email: string, password: string){
-
+  update(user: User){
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.authService.currentUserValue.accessToken}`
+    })
+    // @ts-ignore
+    return this.http.put('http://localhost:8080/user/update', user, headers);
   }
 }

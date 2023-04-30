@@ -19,7 +19,7 @@
               <img alt="image" src="assets/images/users/user-1.png" class="rounded-circle author-box-picture">
               <div class="clearfix"></div>
               <div class="author-box-name">
-                <a href="#" onClick="return false;">Sarah Smith</a>
+                <a href="#" onClick="return false;">{{user.username}}</a>
               </div>
               <div class="author-box-job">Web Developer</div>
             </div>
@@ -219,25 +219,18 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="form-group col-md-6 col-12">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" value="John">
+                      <div class="form-group col-md-12 col-12">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" value="{{user.username}}">
                         <div class="invalid-feedback">
                           Please fill in the first name
-                        </div>
-                      </div>
-                      <div class="form-group col-md-6 col-12">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" value="Deo">
-                        <div class="invalid-feedback">
-                          Please fill in the last name
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-md-7 col-12">
                         <label>Email</label>
-                        <input type="email" class="form-control" value="test@example.com">
+                        <input type="email" [(ngModel)]="user.email" name="email" class="form-control" [ngModelOptions]="{standalone: true}" value="{{user.email}}">
                         <div class="invalid-feedback">
                           Please fill in the email
                         </div>
@@ -267,7 +260,7 @@
                     </div>
                   </div>
                   <div class="card-footer text-end">
-                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-primary" (click)="onSubmit()">Save Changes</button>
                   </div>
                 </ng-template>
               </li>

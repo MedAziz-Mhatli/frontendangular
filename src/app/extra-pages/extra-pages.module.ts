@@ -7,6 +7,7 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { BlankComponent } from './blank/blank.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,6 @@ import { BlankComponent } from './blank/blank.component';
     FaqsComponent,
     BlankComponent,
   ],
-  imports: [CommonModule, ExtraPagesRoutingModule, NgbModule],
+  imports: [CommonModule, ExtraPagesRoutingModule, NgbModule, FormsModule],
 })
 export class ExtraPagesModule {}

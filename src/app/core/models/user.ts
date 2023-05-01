@@ -10,5 +10,6 @@ export class User {
   firstName: string;
   lastName: string;
   verified?: boolean;
-  accessToken: string;
+  accessToken?: string;
+  refreshToken?: string;
 }

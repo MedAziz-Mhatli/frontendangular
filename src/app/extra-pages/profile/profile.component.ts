@@ -17,11 +17,11 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    // @ts-ignore
-    this.user.roles = [{name: this.user.roles[0]}];
+    if (!this.user.password){
+      // @ts-ignore
+      this.user.password = "";
+    }
     console.log(this.user)
-    this.userService.update(this.user).subscribe((res)=>{
-      console.log(res);
-    });
+    this.authService.update(this.user);
   }
 }

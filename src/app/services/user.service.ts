@@ -48,6 +48,6 @@ export class UserService {
       'Authorization': `Bearer ${this.authService.currentUserValue.accessToken}`
     })
     // @ts-ignore
-    return this.http.put('http://localhost:8080/user/update', user, headers);
+    return this.http.put('http://localhost:8080/user/userEdit', user, headers);
   }
 }

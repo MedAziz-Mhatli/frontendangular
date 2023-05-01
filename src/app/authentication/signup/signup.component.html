@@ -28,6 +28,18 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group position-relative">
+                    <label >Fullname <span class="text-danger">*</span></label>
+                    <i name="user" class="login-icons"></i>
+                    <input type="text"
+                           class="form-control psl-5"
+                           name="username"
+                           [(ngModel)]="user.fullname"
+                           placeholder="Fullname"
+                           #fullname="ngModel" required>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group position-relative">
                     <label>Email<span class="text-danger">*</span></label>
                     <i name="mail" class="login-icons"></i>
                     <input type="email" name="email" class="form-control psl-5" [(ngModel)]="user.email" placeholder="Email" required>

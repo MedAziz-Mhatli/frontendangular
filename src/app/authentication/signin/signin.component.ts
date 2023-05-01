@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.scss'],
 })
 export class SigninComponent implements OnInit {
-  email: string;
+  username: string;
   password: string;
   error: string;
   constructor(
@@ -16,18 +16,18 @@ export class SigninComponent implements OnInit {
     private authService: AuthService
   ) {}
   ngOnInit() {
-    this.email = "";
+    this.username = "";
     this.password = "";
     this.error = "";
   }
 
   onSubmit() {
-    if (this.password === "" || this.email === "") {
+    if (this.password === "" || this.username === "") {
       this.error = 'Username and Password not valid !';
       return;
     } else {
       this.authService
-        .login(this.email, this.password)
+        .login(this.username, this.password)
         .subscribe(
           (res) => {
             if (res) {

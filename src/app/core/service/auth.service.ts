@@ -50,18 +50,13 @@ export class AuthService {
     // @ts-ignore
     return this.http.put('http://localhost:8080/user/userEdit', user, headers).subscribe((u) => {
       // @ts-ignore
-      if (u.accessToken){
-        // @ts-ignore
-        this.currentUserSubject.value.accessToken = u.accessToken;
-        // @ts-ignore
-        this.currentUserSubject.value.refreshToken = u.refreshToken;
-      }
-      // @ts-ignore
       this.currentUserSubject.value.username = u.username;
       // @ts-ignore
       this.currentUserSubject.value.email = u.email;
       // @ts-ignore
       this.currentUserSubject.value.adresse = u.adresse;
+      // @ts-ignore
+      this.currentUserSubject.value.fullname = u.fullname;
       localStorage.setItem('currentUser', JSON.stringify(this.currentUserSubject.value));
       alert("Profile updated!")
       return user;

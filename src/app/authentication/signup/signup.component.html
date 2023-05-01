@@ -23,7 +23,12 @@
                            name="username"
                            [(ngModel)]="user.username"
                            placeholder="Username"
-                           #username="ngModel" required>
+                           #username="ngModel" required maxlength="20" minlength="5">
+                  </div>
+                  <div class="alert alert-danger" *ngIf="username.invalid && username.touched">
+                    <div *ngIf="username.errors.maxlength">Le nombre des caracteres ne doit pas depasser 20</div>
+                    <div *ngIf="username.errors.minlength">Le nombre des caracteres ne doit pas inferieur a 5</div>
+                    <div *ngIf="username.errors.required">ce champs est obligatoire!</div>
                   </div>
                 </div>
                 <div class="col-md-12">
@@ -42,7 +47,12 @@
                   <div class="form-group position-relative">
                     <label>Email<span class="text-danger">*</span></label>
                     <i name="mail" class="login-icons"></i>
-                    <input type="email" name="email" class="form-control psl-5" [(ngModel)]="user.email" placeholder="Email" required>
+                    <input type="email" name="email" class="form-control psl-5" [(ngModel)]="user.email" placeholder="Email" #e="ngModel" email="true" required>
+                    <div class="alert alert-danger" *ngIf="e.invalid && e.touched">
+                      <div *ngIf="e.errors.maxlength">Le nombre des caracteres ne doit pas depasser 20</div>
+                      <div *ngIf="e.errors.required">ce champs est obligatoire!</div>
+                      <div *ngIf="e.errors.email">Email!</div>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-12">

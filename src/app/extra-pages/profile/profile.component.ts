@@ -17,7 +17,9 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    this.user.password = "";
+    if (!this.user.password){
+      this.user.password = "";
+    }
     console.log(this.user)
     this.authService.update(this.user);
     this.user.password = "";
